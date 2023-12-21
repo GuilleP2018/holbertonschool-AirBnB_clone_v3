@@ -8,7 +8,7 @@ import os
 from models import storage
 
 app = Flask(__name__)
-from api.v1.views import app_views
+f
 app.register_blueprint(app_views)
 
 @app.teardown_appcontext
@@ -20,3 +20,4 @@ if __name__ == "__main__":
     HBNB_API_HOST = os.getenv('HBNB_API_HOST', default='0.0.0.0')
     HBNB_API_PORT = int(os.getenv('HBNB_API_PORT', default='5000'))
     app.run(host=HBNB_API_HOST, port=HBNB_API_PORT, threaded=True)
+from api.v1.views import app_views
