@@ -8,7 +8,6 @@ import os
 from models import storage
 
 app = Flask(__name__)
-f
 app.register_blueprint(app_views)
 
 @app.teardown_appcontext
