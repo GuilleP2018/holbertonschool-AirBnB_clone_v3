@@ -6,6 +6,7 @@ Contains the TestFileStorageDocs classes
 from datetime import datetime
 import inspect
 import models
+from models import storage
 from models.engine import file_storage
 from models.amenity import Amenity
 from models.base_model import BaseModel
@@ -29,6 +30,16 @@ class TestFileStorageDocs(unittest.TestCase):
     def setUpClass(cls):
         """Set up for the doc tests"""
         cls.fs_f = inspect.getmembers(FileStorage, inspect.isfunction)
+
+    def setUp(self):
+        """set up for tests"""
+        self.state = State()
+        self.state.save()
+
+    def count(self, cls=None):
+        """count objects in storage"""
+        count = storage.count()
+        self.assertEqual(count, len(storage.all()))
 
     def test_pep8_conformance_file_storage(self):
         """Test that models/engine/file_storage.py conforms to PEP8."""
@@ -66,6 +77,16 @@ test_file_storage.py'])
                              "{:s} method needs a docstring".format(func[0]))
             self.assertTrue(len(func[1].__doc__) >= 1,
                             "{:s} method needs a docstring".format(func[0]))
+
+    def test_get(self):
+        """Test the get method"""
+        obj = storage.get(State, self.state.id)
+        self.assertEqual(obj, self.state)
+
+    def test_count(self):
+        """Test the count method"""
+        count = storage.count()
+        self.assertEqual(count, len(storage.all()))
 
 
 class TestFileStorage(unittest.TestCase):
