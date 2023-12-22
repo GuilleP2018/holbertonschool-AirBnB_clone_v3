@@ -12,7 +12,6 @@ from models.state import State
 from models.user import User
 
 
-
 if __name__ == "__main__":
     pass  # Add any additional logic if required
 
